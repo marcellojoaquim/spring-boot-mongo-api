@@ -25,7 +25,7 @@ public class UserResources {
     public ResponseEntity<List<UserDTO>> findAll() {
         List<User> list = service.findAll();
         List<UserDTO> listDto = list.stream()
-                .map(obj -> new UserDTO(obj)).collect(Collectors.toList());
+                .map(UserDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }
 
@@ -42,6 +42,14 @@ public class UserResources {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@RequestBody UserDTO obj, @PathVariable String id){
+        User user = service.fromDTO(obj);
+        user.setId(id);
+        user = service.update(user);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping(value = "/{id}")
