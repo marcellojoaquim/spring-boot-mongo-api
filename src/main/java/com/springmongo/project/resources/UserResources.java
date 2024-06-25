@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.springmongo.project.domain.Post;
 import com.springmongo.project.dto.UserDTO;
 import com.springmongo.project.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,4 +59,9 @@ public class UserResources {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping(value = "/{id}/posts")
+    public  ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        User obj = service.finById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
+    }
 }
