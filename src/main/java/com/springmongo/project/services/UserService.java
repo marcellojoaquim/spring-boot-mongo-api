@@ -6,6 +6,7 @@ import com.springmongo.project.repository.UserRepository;
 import com.springmongo.project.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -17,10 +18,12 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
+    @Transactional
     public List<User> findAll(){
         return repository.findAll();
     }
 
+    @Transactional
     public User finById(String id){
         Optional<User> user = repository.findById(id);
         return user.orElseThrow(()-> new ObjectNotFoundException("Object not found"));
@@ -35,6 +38,7 @@ public class UserService {
         repository.deleteById(id);
     }
 
+    @Transactional
     public User update(User obj){
         try {
             Optional<User> newUser = repository.findById(obj.getId());
