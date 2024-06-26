@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,5 +20,15 @@ public class PostService {
     public Post finById(String id){
         Optional<Post> post = repository.findById(id);
         return post.orElseThrow(()-> new ObjectNotFoundException("Object not found"));
+    }
+
+    @Transactional
+    public List<Post> findByTitle(String text){
+        return repository.findByTitleContainingIgnoreCase(text);
+    }
+
+    @Transactional
+    public List<Post> findByTitleQuery(String text){
+        return repository.findByTitle(text);
     }
 }
