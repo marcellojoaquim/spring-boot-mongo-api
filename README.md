@@ -2,7 +2,7 @@
 # Spring Boot with MongoDB Project
 
 The project is a web application developed in Spring Boot, which uses MongoDB as a NoSQL database for data storage. It follows a layered architecture to maintain a clear separation of responsibilities and facilitate code scalability and maintenance.
-
+In this project we also use Queries Methods and Query annotation for personalized searches.
 
 ## Main Technologies Used:
 
@@ -33,3 +33,15 @@ With this structure, the project is well organized and prepared to deal with the
 
 
 
+# Technologies Used
+- Java 17
+- Maven
+- Spring
+- MongoDB
+- Postman
+
+
+# Author
+Marcello Joaquim da Silva
+
+linkedin.com/in/marcello-joaquim-da-silva-6814bb69
